@@ -13,6 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/css/typeahead/typeahead.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url() ?>assets/css/blog-post.css" rel="stylesheet">
@@ -23,7 +24,12 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <style>
+    .spinner {
+      background:url('<?php echo base_url();?>assets/images/spinner.gif') no-repeat right center !important;
+      background-size : 16px 16px !important;
+    }
+    </style>
 </head>
 
 <body>
@@ -72,86 +78,14 @@
 
                 <!-- Title -->
                 <h1><?php echo @$sekolah->sekolah_nama ?></h1>
-
-                <!-- Author -->
-                <!-- <p class="lead">
-                    by <a href="#">Start Bootstrap</a>
-                </p> -->
-
                 <hr>
-
-                <!-- Date/Time -->
-                <!-- <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p> -->
-
-                <hr>
-
-                <!-- Preview Image -->
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-
-                <hr>
-
                 <!-- Post Content -->
-                <p class="lead"><?php echo @$sekolah->sekolah_desc; ?></p>
+                <?php echo @$sekolah->sekolah_desc; ?>
                <!--  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
  -->
-                <hr>
-
-                <!-- Blog Comments -->
-
-                <!-- Comments Form -->
-                <!-- <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div> -->
-
-                <hr>
-
-                <!-- Posted Comments -->
-
-                <!-- Comment -->
-                <!-- <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
-
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Nested Start Bootstrap
-                                    <small>August 25, 2014 at 9:30 PM</small>
-                                </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
 
             </div>
 
@@ -160,49 +94,43 @@
 
                 <!-- Blog Categories Well -->
                 <div class="well">
-                    <h4>Ekstra Kulikuler</h4>
+                    <h4>Compare Dengan sekolah lain</h4>
                     <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
+                        <div class="col-lg-12">
+                            <form>
+                              <div class="form-group">
+                                <input type="text" class="form-control" id="nmsekolah" placeholder="Cari nama sekolah">
+                              </div>
+                            </form>
                         </div>
                     </div>
                     <!-- /.row -->
                 </div>
-
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                <div class="well" id="listcompare">
+                    <h4>List Compare Sekolah</h4><hr style="border-color:black;">
+                    
+                    <!-- /.row -->
                 </div>
-
+                <button type="button" class="btn btn-success" id="btncompare">Hitung SPK</button>
             </div>
-
         </div>
-        <!-- /.row -->
-
         <hr>
+        <!-- Large modal -->
+        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button> -->
 
+        <div class="modal fade bs-example-modal-lg" id="modalspk" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="mySmallModalLabel">Hasil Perhitungan SPK Sekolah Swasta</h4>
+                </div>
+                <div class="modal-body" id="modalcontent">
+                  
+                </div>
+            </div>
+          </div>
+        </div>
         <!-- Footer -->
         <footer>
             <div class="row">
@@ -221,7 +149,137 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/handlebars.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/bloodhound.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/typeahead.bundle.js"></script>
+    <script type="text/javascript">
+        var idsekolahselected = 0;
+        var idsekolah = '<?php echo $id; ?>';
+        var states = new Bloodhound({ 
+        //datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'), 
+            datumTokenizer: function (datum) {
+                return Bloodhound.tokenizers.whitespace(datum.value);
+            },
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            // `states` is an array of state names defined in "The Basics" 
+            //local: $.map(states, function(state) { return { value: state }; }) 
+            remote: {
+                url: '<?php echo site_url(); ?>dashboard/sekolah_typeahead?',
+                beforeSend: function(xhr){
+                  $('.tt-hint').addClass('spinner');
+                },
+                replace: function(url, uriEncodedQuery) {
+                  query = $('#nmsekolah.tt-input').val();
+                  // if (!val) return url;
+                  return url + 'query='+query+'&idsekolah='+idsekolah;
+                },
+                filter: function (sekolah) {
+                  $('.tt-hint').removeClass('spinner');
+                    return $.map(sekolah.result, function (sekolah) {
+                        return {
+                            nama: sekolah.sekolah_nama,
+                            foto: sekolah.sekolah_foto,
+                            alamat: sekolah.sekolah_alamat,
+                            idsekolah:sekolah.sekolah_id
+                        };
+                    });
+                }
+            }
+          }); 
 
+      // kicks off the loading/processing of `local` and `prefetch` 
+        states.initialize();
+
+        $('#nmsekolah').typeahead(null, {
+            name: 'states',
+            displayKey: 'value',
+            source: states.ttAdapter(),
+            templates: {
+              empty: [
+              '<div class="empty-message">',
+              'tidak dapat menemukan data sekolah',
+              '</div>'
+              ].join('\n'),
+              suggestion: Handlebars.compile('\
+                <div class="row">\
+                        <div class="col-lg-4">\
+                            <img src="<?php echo base_url() ?>foto_sekolah/{{foto}}" width="64" height="64" />\
+                        </div>\
+                        <div class="col-lg-8">\
+                            <p>{{nama}}<br>\
+                            {{alamat}}</p>\
+                        </div>\
+                    </div>')}
+        }).on('typeahead:selected', function (obj, datum) {
+            // console.log(obj);
+            // console.log(datum);
+            if ($("#sekolah"+datum.idsekolah).length == 0) {
+                var foto = '';
+                if (datum.foto) {
+                    foto = '<?php echo base_url() ?>foto_sekolah/'+foto;
+                }else{
+                    foto = '<?php echo base_url(); ?>assets/images/no_image.jpg';
+                }
+                $("#listcompare").append('\
+                    <div class="row rowcompare" id="sekolah'+datum.idsekolah+'"  data-id="'+datum.idsekolah+'">\
+                        <div class="col-lg-4">\
+                            <img src="<?php echo base_url() ?>foto_sekolah/'+datum.foto+'" width="64" height="64" />\
+                        </div>\
+                        <div class="col-lg-8">\
+                            <p>'+datum.nama+'<br>\
+                            '+((datum.alamat) ? datum.alamat : '')+'</p>\
+                            <button type="button" data-id="'+datum.idsekolah+'" class="btn btn-danger btnhapuscompare">Hapus</button>\
+                        </div>\
+                        <div class="col-lg-12">\
+                    <hr style="border-color:black;">\
+                    </div>\
+                    </div>');
+            }
+            // idsekolahselected = datum.idsekolah;
+        });
+
+      $('.tt-query').css('background-color','#fff');
+
+      $("#btncompare").click(function(event) {
+          event.preventDefault();
+          var arrsekolah = [];
+          arrsekolah.push(<?php echo $id; ?>);
+          if ($(".rowcompare").length == 0) {
+            alert('anda belum memilih sekolah lain untuk dicompare !');
+            return false;
+          }
+
+          $(".rowcompare").each(function(index, el) {
+              arrsekolah.push($(this).data().id);
+          });
+
+          console.info(arrsekolah);
+
+          $.ajax({
+              url: '<?php echo base_url(); ?>dashboard/compare',
+              type: 'POST',
+              dataType: 'html',
+              data: {arr: arrsekolah},
+          })
+          .done(function(resp) {
+              $("#modalcontent").html(resp);
+              $("#modalspk").modal("show");
+          })
+          .fail(function() {
+              console.log("error");
+          })
+          .always(function() {
+              console.log("complete");
+          });
+          
+      });
+
+      $(document).on('click', '.btnhapuscompare', function(event) {
+          event.preventDefault();
+          var id = $(this).data().id;
+          $("#sekolah"+id).remove();
+      });
+    </script>
 </body>
 
 </html>

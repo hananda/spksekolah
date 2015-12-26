@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,60 +66,33 @@
 
         <!-- Page Header -->
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-md-6">
                 <h1 class="page-header">Daftar Sekolah Swasta
                     <!-- <small>Secondary Text</small> -->
                 </h1>
             </div>
+            <div class="col-md-6">
+            <form class="form-inline" style="margin-top:50px;">
+                <select class="form-control" id="kriteria">
+                    <option value="0">Pilih Kriteria</option>
+                    <?php if ($kriteria->num_rows > 0): ?>
+                        <?php foreach ($kriteria->result() as $r): ?>
+                            <option value="<?php echo $r->kriteria_id ?>"><?php echo $r->kriteria_nama; ?></option>
+                        <?php endforeach ?>
+                    <?php endif ?>
+                </select>
+                <select class="form-control" id="detailkriteria">
+                    <option value="0">Pilih Detail Kriteria</option>
+                </select>
+                <button id="btncari" class="btn btn-info">Cari</button>
+                </form>
+            </div>
         </div>
         <!-- /.row -->
 
-        <!-- Projects Row -->
-        <div class="row">
-            <?php if ($sekolah->num_rows > 0): ?>
-                <?php foreach ($sekolah->result() as $r): ?>
-                    <div class="col-md-4 portfolio-item">
-                        <a href="#">
-                            <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                        </a>
-                        <h3>
-                            <a href="<?php echo base_url() ?>detail/<?php echo $r->sekolah_id; ?>"><?php echo $r->sekolah_nama ?></a>
-                        </h3>
-                        <p><?php echo $r->sekolah_desc; ?></p>
-                    </div>
-                <?php endforeach ?>
-            <?php endif ?>
-        </div>
-
-        <hr>
-
-        <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
+        <!-- Projects Row class="img-responsive" -->
+        <div id="content">
+            
         </div>
         <!-- /.row -->
 
@@ -142,7 +116,29 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $("#kriteria").change(function(event) {
+            var kriteria = $(this).val();
+            $.getJSON('<?php echo base_url() ?>dashboard/getdetail/'+kriteria, {}, function(json, textStatus) {
+                    $("#detailkriteria").html('<option value="0">Pilih Detail Kriteria</option>');
+                    for(var i = 0;i<json.length;i++){
+                        $("#detailkriteria").append('<option value="'+json[i].detail_kriteria_id+'">'+json[i].detail_kriteria_nama+'</option>');
+                    }
+            });    
+        });
 
+        $("#btncari").click(function(event) {
+            event.preventDefault();
+            reloadpage(1);
+        });
+
+        function reloadpage (hal) {
+            var idkriteria = $("#detailkriteria").val();
+            $("#content").load("<?php echo base_url(); ?>dashboard/getdatasekolah/"+hal+"/"+idkriteria);
+        }
+
+        reloadpage(1);
+    </script>
 </body>
 
 </html>

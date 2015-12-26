@@ -31,6 +31,9 @@ class Sekolah extends CI_Controller {
             case 'formkriteria':
             	$this->_formkriteria();
                 break;
+            case 'insertkriteria':
+            	$this->_insertkriteria();
+                break;
 			default:
 				echo 'no task request';
 				break;
@@ -61,11 +64,20 @@ class Sekolah extends CI_Controller {
 		$this->output->set_content_type('application/json')->set_output(json_encode($records));
 	}
 
+	public function _insertkriteria()
+	{
+		$records = $this->model_sekolah->_insertkriteria();
+		$this->output->set_content_type('application/json')->set_output(json_encode($records));
+	}
+
 	public function _formkriteria()
 	{
 		$data = array();
+		$data['idsekolah'] = $this->input->post('idsekolah');
 		$data['kriteria'] = $this->model_public->_getKriteria();
-		$data['detailkriteria'] = $this->model_public->_getDetailKriteria();
+		$data['detailkriteria'] = $this->db->query("select detail_kriteria.*,(case when t_kriteria_id is null then 0 else 1 end) as selected from detail_kriteria
+									LEFT JOIN t_kriteria ON detail_kriteria_id = t_kriteria_detail_kriteria_id and t_kriteria_sekolah_id = ".$data['idsekolah']."
+									 where detail_kriteria_aktif = 'Y'");
 		$this->load->view('view_inputkriteria', $data, FALSE);
 	}
 

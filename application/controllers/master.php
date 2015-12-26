@@ -32,6 +32,15 @@ class Master extends CI_Controller {
 		$this->load->view('main', $data, FALSE);
 	}
 
+	public function sub_kriteria($idsub=0)
+	{
+		$data = array();
+		$datacontent = array();
+		$datacontent['datasub'] = $this->db->query("SELECT * FROM detail_kriteria WHERE detail_kriteria_id = ".$idsub)->row();
+		$data['content'] = $this->load->view('view_subkriteria', $datacontent,TRUE);
+		$this->load->view('main', $data, FALSE);
+	}
+
 	public function variabel()
 	{
 		$data = array();

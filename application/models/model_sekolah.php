@@ -75,6 +75,8 @@ class Model_sekolah extends CI_Model {
             $this->db->update('sekolah',$data);
         }else{
             $data['sekolah_user'] = $this->session->userdata('user_id');
+            $this->db->set('sekolah_created_date', "'".date('Y-m-d H:i:s')."'",false);
+            $this->db->set('sekolah_updated_date', "'".date('Y-m-d H:i:s')."'",false);
             $this->db->insert('sekolah', $data);
         }
 
@@ -111,6 +113,39 @@ class Model_sekolah extends CI_Model {
     {
         $idsekolah = $this->input->post('idsekolah');
         $result = $this->db->query('SELECT sekolah_desc from sekolah WHERE sekolah_id = '.$idsekolah)->row();
+        return $result;
+    }
+
+    public function _insertkriteria()
+    {
+        $idsekolah = $this->input->post('idsekolah');
+        $this->db->where('t_kriteria_sekolah_id', $idsekolah);
+        $this->db->delete('t_kriteria');
+        $kriteria = $this->model_public->_getKriteria();
+        if ($kriteria->num_rows > 0) {
+            foreach ($kriteria->result() as $r) {
+                $detailkriteria = $this->input->post('kategori_'.$r->kriteria_id);
+                for ($i=0; $i < count($detailkriteria); $i++) { 
+                    $data = array(
+                        't_kriteria_sekolah_id'=>$idsekolah,
+                        't_kriteria_kriteria_id'=>$r->kriteria_id
+                    );
+
+                    $data['t_kriteria_created_date'] = date('Y-m-d H:i:s');
+                    $data['t_kriteria_detail_kriteria_id'] = $detailkriteria[$i];
+                    $data['t_kriteria_user'] = $this->session->userdata('user_id');
+                    $this->db->insert('t_kriteria', $data);
+                }   
+            }
+        }
+
+        if ($this->db->affected_rows()>0) {
+            $result['message'] = 'Data berhasil disimpan';
+            $result['status'] = true;
+        }else{
+            $result['message'] = 'Data gagal disimpan';
+            $result['status'] = false;
+        }
         return $result;
     }
 

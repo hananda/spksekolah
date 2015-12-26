@@ -1,3 +1,6 @@
+<?php 
+if ($datasub) {
+?>
 <link href="<?php echo base_url(); ?>assets/css/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <script src="<?php echo base_url(); ?>assets/js/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrapPager.js" type="text/javascript"></script>
@@ -6,7 +9,7 @@
         <h3>
             Master
             <small>
-                Detail Kriteria
+                Sub Detail Kriteria
             </small>
         </h3>
     </div>
@@ -29,7 +32,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Form Detail Kriteria</h2>
+                <h2>Form Sub Detail Kriteria</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><!-- <i class="fa fa-wrench"></i> --></a>
@@ -43,20 +46,9 @@
             </div>
             <div class="x_content">
                 <form class="form-horizontal form-label-left" data-parsley-validate="" id="formdetailkriteria" novalidate="">
+                    <input type="hidden" name="idsubkriteria" value="<?php echo $datasub->detail_kriteria_id; ?>" id="idsubkriteria" />
+                    <input type="hidden" name="idkriteria" value="<?php echo $datasub->detail_kriteria_id_kriteria; ?>" id="idkriteria" />
                     <input type="hidden" name="iddetailkriteria" id="iddetailkriteria" />
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Kriteria</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <select class="form-control" id="kriteria" name="idkriteria" required="required">
-                            <option value="">Pilih Kriteria</option>
-                            <?php if ($kriteria->num_rows > 0): ?>
-                                <?php foreach ($kriteria->result() as $r): ?>
-                                    <option value="<?php echo $r->kriteria_id ?>"><?php echo $r->kriteria_nama; ?></option>
-                                <?php endforeach ?>
-                            <?php endif ?>
-                            </select>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="namadetailkriteria" class="control-label col-md-3 col-sm-3 col-xs-12">Nama Detail Kriteria
                         </label>
@@ -68,7 +60,7 @@
                         <label for="nilaidetailkriteria" class="control-label col-md-3 col-sm-3 col-xs-12">Nilai Detail Kriteria
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" class="form-control col-md-7 col-xs-12" name="nilaidetailkriteria" id="nilaidetailkriteria" data-parsley-id="5637"><ul class="parsley-errors-list" id="parsley-id-5637"></ul>
+                            <input type="text" class="form-control col-md-7 col-xs-12" required="required" name="nilaidetailkriteria" id="nilaidetailkriteria" data-parsley-id="5637"><ul class="parsley-errors-list" id="parsley-id-5637"></ul>
                         </div>
                     </div>
                     
@@ -94,7 +86,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Tabel Detail Kriteria</h2>
+                <h2>Tabel Sub Detail Kriteria</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><!-- <i class="fa fa-wrench"></i> --></a>
@@ -111,11 +103,9 @@
                     <thead>
                         <tr class="headings">
                             <th></th>
-                            <th></th>
                             <th>
                                 No
                             </th>
-                            <th>Kriteria </th>
                             <th>Nama Detail Kriteria </th>
                             <th>Nilai</th>
                             <th class=" no-link last"><span class="nobr">Action</span>
@@ -141,7 +131,7 @@
             var data = $(this).serialize();
 
             $.ajax({
-                url: '<?php echo base_url(); ?>detail_kriteria/index/update',
+                url: '<?php echo base_url(); ?>detail_kriteria/index/updatesub',
                 type: 'POST',
                 dataType: 'json',
                 data: data,
@@ -198,8 +188,6 @@
           // "order": [[ 4, "asc" ]],
           "columns": [
             {"visible" : false,"orderable":false },
-            {"visible" : false,"orderable":false },
-            {"orderable":false },
             {"orderable":false },
             {"orderable":false },
             {"orderable":false },
@@ -214,7 +202,7 @@
           processing: true,
           serverSide: true,
           ajax: {
-            url: "<?php echo base_url(); ?>detail_kriteria/index/get",
+            url: "<?php echo base_url(); ?>detail_kriteria/index/getsub?idsub=<?php echo $datasub->detail_kriteria_id; ?>",
             type: "POST",
             data: function (d) {
                 
@@ -263,9 +251,8 @@
                 var dataedit = table.row( parent ).data();
 
                 $("#iddetailkriteria").val(dataedit[0]);
-                $("#kriteria").val(dataedit[1]);
-                $("#namadetailkriteria").val($(dataedit[4]).data().asli);
-                $("#nilaidetailkriteria").val(dataedit[5]);
+                $("#namadetailkriteria").val(dataedit[2]);
+                $("#nilaidetailkriteria").val(dataedit[3]);
 
 
                 if (!jendela) {
@@ -273,38 +260,17 @@
                     jendela = !jendela;
                 };
             });
-
-            $(".btnsub").click(function(e) {
-                e.preventDefault();
-                var parent = $(this).parent().parent();
-                var dataedit = table.row( parent ).data();
-                var id = dataedit[0];
-                var valparent = $(this).data().val;
-                $.post("<?php echo base_url(); ?>detail_kriteria/index/setsub", {'iddetailkriteria': id,'val':valparent}, function (response) {
-                    if(response.status){
-                        NotifikasiToast({
-                            type : 'success', // ini tipe notifikasi success,warning,info,error
-                            msg : response.message, //ini isi pesan
-                            title : '', //ini judul pesan
-                        });
-                        table.ajax.reload();
-                    }
-                    else{
-                        NotifikasiToast({
-                            type : 'error', // ini tipe notifikasi success,warning,info,error
-                            msg : response.message, //ini isi pesan
-                            title : '', //ini judul pesan
-                        });
-                    }
-                });
-            });
         }
 
         function clear () {
             $("#iddetailkriteria").val("");
-            $("#kriteria").val("");
             $("#namadetailkriteria").val("");
             $("#nilaidetailkriteria").val("");
         }
     });
 </script>
+<?php 
+}else{
+    echo "Tidak ada id sub";
+}
+ ?>

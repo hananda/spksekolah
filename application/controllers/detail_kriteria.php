@@ -19,11 +19,20 @@ class Detail_kriteria extends CI_Controller {
 			case 'get':
 				$this->_get();
 				break;
+			case 'getsub':
+				$this->_getsub();
+				break;
 			case 'update':
 				$this->_update();
                 break;
+			case 'updatesub':
+				$this->_updatesub();
+                break;
             case 'delete':
             	$this->_delete();
+                break;
+            case 'setsub':
+            	$this->_setsub();
                 break;
 			default:
 				echo 'no task request';
@@ -37,15 +46,33 @@ class Detail_kriteria extends CI_Controller {
         $this->output->set_content_type('application/json')->set_output(json_encode($records));
 	}
 
+	public function _getsub()
+	{
+		$records = $this->model_detailkriteria->_getsub();
+        $this->output->set_content_type('application/json')->set_output(json_encode($records));
+	}
+
 	public function _update()
 	{
 		$records = $this->model_detailkriteria->_update();
         $this->output->set_content_type('application/json')->set_output(json_encode($records));
 	}
 
+	public function _updatesub()
+	{
+		$records = $this->model_detailkriteria->_updatesub();
+        $this->output->set_content_type('application/json')->set_output(json_encode($records));
+	}
+
 	public function _delete()
 	{
 		$records = $this->model_detailkriteria->_delete();
+        $this->output->set_content_type('application/json')->set_output(json_encode($records));
+	}
+
+	public function _setsub()
+	{
+		$records = $this->model_detailkriteria->_setsub();
         $this->output->set_content_type('application/json')->set_output(json_encode($records));
 	}
 
