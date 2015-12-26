@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2015-12-13 22:30:56
+Date: 2015-12-26 22:54:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,37 +27,54 @@ CREATE TABLE `detail_kriteria` (
   `detail_created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `detail_user` int(11) DEFAULT NULL,
   `detail_kriteria_bobot` int(11) DEFAULT NULL,
+  `detail_kriteria_parent` int(11) DEFAULT '-1' COMMENT 'jika -1 brarti detail kriteria tanpa sub, jika 0 brarti sub kriteria, jika tidak keduanya brarti detail dari sub',
   PRIMARY KEY (`detail_kriteria_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of detail_kriteria
 -- ----------------------------
-INSERT INTO `detail_kriteria` VALUES ('1', 'Akreditasi A', '1', 'Y', '2015-04-04 00:00:00', '1', '100');
-INSERT INTO `detail_kriteria` VALUES ('2', 'Akreditasi B', '1', 'Y', '2015-04-04 11:44:05', '1', '60');
-INSERT INTO `detail_kriteria` VALUES ('3', 'Akreditasi C', '1', 'Y', '2015-04-04 11:44:15', '1', '20');
-INSERT INTO `detail_kriteria` VALUES ('8', 'Perlengkapan', '2', 'Y', '2015-04-04 11:52:06', '1', '45');
-INSERT INTO `detail_kriteria` VALUES ('9', 'SPP Bulanan', '2', 'Y', '2015-04-04 11:52:28', '1', '35');
-INSERT INTO `detail_kriteria` VALUES ('10', 'Uang gedung sekolah', '2', 'Y', '2015-04-04 11:52:39', '1', '20');
-INSERT INTO `detail_kriteria` VALUES ('11', 'Paduan Suara', '3', 'Y', '2015-04-04 12:39:31', '1', '20');
-INSERT INTO `detail_kriteria` VALUES ('12', 'Musik Band', '3', 'Y', '2015-04-04 12:42:06', '1', '10');
-INSERT INTO `detail_kriteria` VALUES ('13', 'Futsal', '3', 'Y', '2015-04-04 12:42:14', '1', '25');
-INSERT INTO `detail_kriteria` VALUES ('14', 'Basket', '3', 'Y', '2015-04-04 12:43:05', '1', '20');
-INSERT INTO `detail_kriteria` VALUES ('36', 'Pecinta Alam', '3', 'Y', '2015-10-27 19:42:05', null, '20');
-INSERT INTO `detail_kriteria` VALUES ('37', 'Kelas Ber AC', '15', 'Y', '2015-10-27 19:42:42', null, '25');
-INSERT INTO `detail_kriteria` VALUES ('38', 'Proyektor Tiap Kelas', '15', 'Y', '2015-10-27 19:43:00', null, '25');
-INSERT INTO `detail_kriteria` VALUES ('39', 'Mendapatkan Makan Siang', '15', 'Y', '2015-10-27 19:43:24', null, '20');
-INSERT INTO `detail_kriteria` VALUES ('40', 'Laboratorium sekolah', '15', 'Y', '2015-10-27 19:43:44', null, '20');
-INSERT INTO `detail_kriteria` VALUES ('41', 'Lift sekolah', '15', 'Y', '2015-10-27 19:43:57', null, '10');
-INSERT INTO `detail_kriteria` VALUES ('42', 'Kemudahan akses', '16', 'Y', '2015-10-27 19:44:27', null, '50');
-INSERT INTO `detail_kriteria` VALUES ('43', 'Pinggir jalan', '16', 'Y', '2015-10-27 19:44:42', null, '20');
-INSERT INTO `detail_kriteria` VALUES ('44', 'Terletak dipusat kota', '16', 'Y', '2015-10-27 19:44:59', null, '30');
-INSERT INTO `detail_kriteria` VALUES ('45', 'coba 1', '17', 'Y', '2015-11-12 21:59:54', null, '20');
-INSERT INTO `detail_kriteria` VALUES ('46', 'coba 2', '17', 'Y', '2015-11-12 22:00:07', null, '30');
-INSERT INTO `detail_kriteria` VALUES ('47', 'coba 3', '17', 'Y', '2015-11-12 22:00:16', null, '50');
-INSERT INTO `detail_kriteria` VALUES ('48', 'Juara 1 Matematika', '18', 'Y', '2015-11-19 19:06:49', null, '50');
-INSERT INTO `detail_kriteria` VALUES ('49', 'Juara 1 Fisika', '18', 'Y', '2015-11-19 19:07:01', null, '30');
-INSERT INTO `detail_kriteria` VALUES ('50', 'Tidak Punya', '3', 'Y', '2015-12-13 21:33:40', null, '5');
+INSERT INTO `detail_kriteria` VALUES ('1', 'Akreditasi A', '1', 'Y', '2015-04-04 00:00:00', '1', '100', '-1');
+INSERT INTO `detail_kriteria` VALUES ('2', 'Akreditasi B', '1', 'Y', '2015-04-04 11:44:05', '1', '60', '-1');
+INSERT INTO `detail_kriteria` VALUES ('3', 'Akreditasi C', '1', 'Y', '2015-04-04 11:44:15', '1', '20', '-1');
+INSERT INTO `detail_kriteria` VALUES ('8', 'Perlengkapan Sekolah', '2', 'Y', '2015-04-04 11:52:06', '1', '20', '53');
+INSERT INTO `detail_kriteria` VALUES ('9', 'SPP Bulanan', '2', 'Y', '2015-04-04 11:52:28', '1', '30', '52');
+INSERT INTO `detail_kriteria` VALUES ('10', 'Uang gedung sekolah', '2', 'Y', '2015-04-04 11:52:39', '1', '30', '53');
+INSERT INTO `detail_kriteria` VALUES ('11', 'Paduan Suara', '3', 'Y', '2015-04-04 12:39:31', '1', '10', '58');
+INSERT INTO `detail_kriteria` VALUES ('12', 'Musik Band', '3', 'Y', '2015-04-04 12:42:06', '1', '10', '58');
+INSERT INTO `detail_kriteria` VALUES ('13', 'Futsal', '3', 'Y', '2015-04-04 12:42:14', '1', '20', '57');
+INSERT INTO `detail_kriteria` VALUES ('14', 'Basket', '3', 'Y', '2015-04-04 12:43:05', '1', '20', '57');
+INSERT INTO `detail_kriteria` VALUES ('36', 'Pecinta Alam', '3', 'Y', '2015-10-27 19:42:05', null, '10', '57');
+INSERT INTO `detail_kriteria` VALUES ('37', 'Kelas Ber AC', '15', 'Y', '2015-10-27 19:42:42', null, '25', '66');
+INSERT INTO `detail_kriteria` VALUES ('38', 'LCD Tiap Kelas', '15', 'Y', '2015-10-27 19:43:00', null, '25', '66');
+INSERT INTO `detail_kriteria` VALUES ('39', 'Mendapatkan Makan Siang', '15', 'Y', '2015-10-27 19:43:24', null, '10', '67');
+INSERT INTO `detail_kriteria` VALUES ('40', 'Laboratorium sekolah', '15', 'Y', '2015-10-27 19:43:44', null, '20', '65');
+INSERT INTO `detail_kriteria` VALUES ('41', 'Lift sekolah', '15', 'Y', '2015-10-27 19:43:57', null, '20', '65');
+INSERT INTO `detail_kriteria` VALUES ('42', 'Kemudahan akses', '16', 'Y', '2015-10-27 19:44:27', null, '50', '-1');
+INSERT INTO `detail_kriteria` VALUES ('43', 'Pinggir jalan', '16', 'Y', '2015-10-27 19:44:42', null, '20', '-1');
+INSERT INTO `detail_kriteria` VALUES ('44', 'Terletak dipusat kota', '16', 'Y', '2015-10-27 19:44:59', null, '30', '-1');
+INSERT INTO `detail_kriteria` VALUES ('45', 'coba 1', '17', 'Y', '2015-11-12 21:59:54', null, '20', '-1');
+INSERT INTO `detail_kriteria` VALUES ('46', 'coba 2', '17', 'Y', '2015-11-12 22:00:07', null, '30', '-1');
+INSERT INTO `detail_kriteria` VALUES ('47', 'coba 3', '17', 'Y', '2015-11-12 22:00:16', null, '50', '-1');
+INSERT INTO `detail_kriteria` VALUES ('48', 'Juara 1 Matematika', '18', 'Y', '2015-11-19 19:06:49', null, '50', '-1');
+INSERT INTO `detail_kriteria` VALUES ('49', 'Juara 1 Fisika', '18', 'Y', '2015-11-19 19:07:01', null, '30', '-1');
+INSERT INTO `detail_kriteria` VALUES ('50', 'Tidak Punya', '3', 'Y', '2015-12-13 21:33:40', null, '5', '-1');
+INSERT INTO `detail_kriteria` VALUES ('52', 'Rutin Bulanan', '2', 'Y', '2015-12-26 21:35:48', null, '0', '0');
+INSERT INTO `detail_kriteria` VALUES ('53', 'Awal Sekolah', '2', 'Y', '2015-12-26 21:36:01', null, '0', '0');
+INSERT INTO `detail_kriteria` VALUES ('54', 'Uang Kegiatan', '2', 'Y', '2015-12-26 21:38:33', null, '10', '52');
+INSERT INTO `detail_kriteria` VALUES ('55', 'Uang Makan', '2', 'Y', '2015-12-26 21:38:40', null, '10', '52');
+INSERT INTO `detail_kriteria` VALUES ('56', 'Ekskul Ilmiah', '3', 'Y', '2015-12-26 21:41:58', null, '0', '0');
+INSERT INTO `detail_kriteria` VALUES ('57', 'Ekskul Olahraga', '3', 'Y', '2015-12-26 21:42:16', null, '0', '0');
+INSERT INTO `detail_kriteria` VALUES ('58', 'Ekskul Entertaint', '3', 'Y', '2015-12-26 21:42:42', null, '0', '0');
+INSERT INTO `detail_kriteria` VALUES ('59', 'Karya Ilmiah', '3', 'Y', '2015-12-26 21:44:35', null, '10', '56');
+INSERT INTO `detail_kriteria` VALUES ('60', 'English Club', '3', 'Y', '2015-12-26 21:44:48', null, '10', '56');
+INSERT INTO `detail_kriteria` VALUES ('61', 'TPQ', '3', 'Y', '2015-12-26 21:44:56', null, '5', '56');
+INSERT INTO `detail_kriteria` VALUES ('62', 'Voli', '3', 'Y', '2015-12-26 21:45:30', null, '5', '57');
+INSERT INTO `detail_kriteria` VALUES ('63', 'Cheers', '3', 'Y', '2015-12-26 21:45:43', null, '20', '57');
+INSERT INTO `detail_kriteria` VALUES ('64', 'Teater', '3', 'Y', '2015-12-26 21:46:14', null, '10', '58');
+INSERT INTO `detail_kriteria` VALUES ('65', 'Fasilitas Gedung', '15', 'Y', '2015-12-26 21:48:26', null, '0', '0');
+INSERT INTO `detail_kriteria` VALUES ('66', 'Fasilitas Kelas', '15', 'Y', '2015-12-26 21:48:40', null, '0', '0');
+INSERT INTO `detail_kriteria` VALUES ('67', 'Fasilitas Konsumsi', '15', 'Y', '2015-12-26 21:49:00', null, '0', '0');
 
 -- ----------------------------
 -- Table structure for kriteria
@@ -119,7 +136,7 @@ CREATE TABLE `t_kriteria` (
   `t_kriteria_created_date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `t_kriteria_user` int(11) DEFAULT NULL,
   PRIMARY KEY (`t_kriteria_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of t_kriteria
@@ -136,15 +153,6 @@ INSERT INTO `t_kriteria` VALUES ('38', '4', '15', '40', '2015-11-01 21:24:08', '
 INSERT INTO `t_kriteria` VALUES ('39', '4', '15', '41', '2015-11-01 21:24:08', '1');
 INSERT INTO `t_kriteria` VALUES ('40', '4', '16', '43', '2015-11-01 21:24:08', '1');
 INSERT INTO `t_kriteria` VALUES ('41', '4', '16', '44', '2015-11-01 21:24:08', '1');
-INSERT INTO `t_kriteria` VALUES ('51', '1', '1', '1', '2015-12-13 14:54:48', '0');
-INSERT INTO `t_kriteria` VALUES ('52', '1', '2', '8', '2015-12-13 14:54:48', '0');
-INSERT INTO `t_kriteria` VALUES ('53', '1', '2', '9', '2015-12-13 14:54:48', '0');
-INSERT INTO `t_kriteria` VALUES ('54', '1', '3', '12', '2015-12-13 14:54:48', '0');
-INSERT INTO `t_kriteria` VALUES ('55', '1', '3', '13', '2015-12-13 14:54:48', '0');
-INSERT INTO `t_kriteria` VALUES ('56', '1', '3', '14', '2015-12-13 14:54:48', '0');
-INSERT INTO `t_kriteria` VALUES ('57', '1', '15', '40', '2015-12-13 14:54:48', '0');
-INSERT INTO `t_kriteria` VALUES ('58', '1', '16', '42', '2015-12-13 14:54:48', '0');
-INSERT INTO `t_kriteria` VALUES ('59', '1', '16', '43', '2015-12-13 14:54:48', '0');
 INSERT INTO `t_kriteria` VALUES ('60', '2', '1', '1', '2015-12-13 15:10:52', '0');
 INSERT INTO `t_kriteria` VALUES ('61', '2', '2', '9', '2015-12-13 15:10:52', '0');
 INSERT INTO `t_kriteria` VALUES ('62', '2', '2', '10', '2015-12-13 15:10:52', '0');
@@ -159,6 +167,15 @@ INSERT INTO `t_kriteria` VALUES ('77', '3', '3', '50', '2015-12-13 15:34:16', '1
 INSERT INTO `t_kriteria` VALUES ('78', '3', '15', '40', '2015-12-13 15:34:16', '1');
 INSERT INTO `t_kriteria` VALUES ('79', '3', '16', '42', '2015-12-13 15:34:16', '1');
 INSERT INTO `t_kriteria` VALUES ('80', '3', '16', '43', '2015-12-13 15:34:16', '1');
+INSERT INTO `t_kriteria` VALUES ('91', '1', '1', '1', '2015-12-26 16:07:28', '1');
+INSERT INTO `t_kriteria` VALUES ('92', '1', '2', '9', '2015-12-26 16:07:28', '1');
+INSERT INTO `t_kriteria` VALUES ('93', '1', '2', '8', '2015-12-26 16:07:28', '1');
+INSERT INTO `t_kriteria` VALUES ('94', '1', '3', '13', '2015-12-26 16:07:28', '1');
+INSERT INTO `t_kriteria` VALUES ('95', '1', '3', '14', '2015-12-26 16:07:28', '1');
+INSERT INTO `t_kriteria` VALUES ('96', '1', '3', '12', '2015-12-26 16:07:28', '1');
+INSERT INTO `t_kriteria` VALUES ('97', '1', '15', '40', '2015-12-26 16:07:28', '1');
+INSERT INTO `t_kriteria` VALUES ('98', '1', '16', '42', '2015-12-26 16:07:28', '1');
+INSERT INTO `t_kriteria` VALUES ('99', '1', '16', '43', '2015-12-26 16:07:28', '1');
 
 -- ----------------------------
 -- Table structure for user
