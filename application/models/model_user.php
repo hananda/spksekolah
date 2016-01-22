@@ -38,11 +38,17 @@ class Model_user extends CI_Model {
         $i = $start + 1;
         $result = array();
         foreach ($data as $d) {
+            if ($d['user_type'] == 1) {
+                $type = 'Super Admin';
+            }else{
+                $type = 'Admin';
+            }
             $r = array();
 			$r[0] = $d['user_id'];
 			$r[1] = $i;
-			$r[2] = $d['user_nama'];
-			$r[3] = '<a class="btnedit" style="cursor:pointer;" title="Edit"><i class="fa fa-edit"></i></a>
+            $r[2] = $d['user_nama'];
+			$r[3] = $type;
+			$r[4] = '<a class="btnedit" data-tipe="'.$d['user_type'].'" style="cursor:pointer;" title="Edit"><i class="fa fa-edit"></i></a>
 			<a class="btndelete" style="cursor:pointer;" title="Hapus"><i class="fa fa-trash"></i></a>';
             array_push($result, $r);
             $i++;
@@ -59,14 +65,22 @@ class Model_user extends CI_Model {
     {
         $id = $this->input->post('iduser');
         $nama = $this->input->post('namauser');
+        $tipe = $this->input->post('tipe');
+        $ceknamaifexist = $this->db->query("SELECT user_id from user where user_nama = '".$nama."'");
+        
         $password = $this->input->post('password');
         $filter = array('user_id'=>$id);
-        $data = array('user_nama'=>$nama,'user_pass'=>md5($password));
+        $data = array('user_nama'=>$nama,'user_type'=>$tipe,'user_pass'=>md5($password));
         
         if ($id) {
             $this->db->where($filter);
             $this->db->update('user',$data);
         }else{
+            if ($ceknamaifexist->num_rows > 0) {
+                $result['message'] = 'User sudah tersedia !!';
+                $result['status'] = false;
+                return $result;
+            }
             $this->db->insert('user', $data);
         }
 

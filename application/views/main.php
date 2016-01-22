@@ -74,16 +74,20 @@
                                 </li>
                                 <li><a><i class="fa fa-desktop"></i> Master <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
+                                    <?php if ($this->session->userdata('user_type') == 1): ?>
                                         <li><a href="<?php echo base_url() ?>master/kriteria">Kriteria</a>
                                         </li>
                                         <li><a href="<?php echo base_url() ?>master/detail_kriteria">Detail Kriteria</a>
                                         </li>
                                         <li><a href="<?php echo base_url() ?>master/variabel">Variabel</a>
                                         </li>
+                                    <?php endif ?>
                                         <li><a href="<?php echo base_url() ?>master/sekolah">Sekolah</a>
                                         </li>
+                                    <?php if ($this->session->userdata('user_type') == 1): ?>
                                         <li><a href="<?php echo base_url() ?>master/user">User</a>
                                         </li>
+                                    <?php endif ?>
                                     </ul>
                                 </li>   
                             </ul>

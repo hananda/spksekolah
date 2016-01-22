@@ -24,6 +24,7 @@ class Model_public extends CI_Model {
 			}
 		}
 		$this->db->where('detail_kriteria_aktif', 'Y');
+		$this->db->where('detail_kriteria_parent <> 0');
 		$this->db->select($select);
 		$data = $this->db->get('detail_kriteria');
 		return $data;

@@ -58,6 +58,18 @@
                             <input type="text" class="form-control col-md-7 col-xs-12" required="required" name="password" id="password" data-parsley-id="5637"><ul class="parsley-errors-list" id="parsley-id-5637"></ul>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="tipe" class="control-label col-md-3 col-sm-3 col-xs-12">Tipe
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" required name="tipe" id="tipe">
+                                <option value="0">Pilih Tipe</option>
+                                <option value="1">Super Admin</option>
+                                <option value="2">Admin</option>
+                            </select>
+                            <!-- <input type="text" class="form-control col-md-7 col-xs-12" required="required" name="tipe" id="password" data-parsley-id="5637"><ul class="parsley-errors-list" id="parsley-id-5637"></ul> -->
+                        </div>
+                    </div>
                     
                     <div class="ln_solid"></div>
                     <div class="form-group">
@@ -102,6 +114,7 @@
                                 No
                             </th>
                             <th>Nama user </th>
+                            <th>Tipe </th>
                             <th class=" no-link last"><span class="nobr">Action</span>
                             </th>
                         </tr>
@@ -184,6 +197,7 @@
             {"visible" : false,"orderable":false },
             {"orderable":false },
             {"orderable":false },
+            {"orderable":false },
             {"orderable":false}
           ],
           pagingType: "bootstrapPager",
@@ -242,10 +256,12 @@
                 e.preventDefault();
                 var parent = $(this).parent().parent();
                 var dataedit = table.row( parent ).data();
+                var tipe = $(this).data().tipe;
                 
 
                 $("#iduser").val(dataedit[0]);
                 $("#namauser").val(dataedit[2]);
+                $("#tipe").val(tipe);
                 if (!jendela) {
                     $("#formcollapse").click();
                     jendela = !jendela;
@@ -256,6 +272,8 @@
         function clear () {
             $("#iduser").val("");
             $("#namauser").val("");
+            $("#password").val("");
+            $("#tipe").val("");
         }
 
     });

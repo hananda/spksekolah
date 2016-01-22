@@ -29,6 +29,7 @@ class Login extends CI_Controller {
                         'login_time' => time(),
                         'user_id'   => $data_user->user_id,
                         'user_nama'      => $data_user->user_nama,
+                        'user_type' => $data_user->user_type
                         ); 
 
             // if($data_user->tipe_user == 3)
